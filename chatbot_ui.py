@@ -13,13 +13,13 @@ from PIL import Image
 import base64
 
 # =============================================================================
-# CONFIGURATION - ADD YOUR GROQ API KEY HERE
+# CONFIGURATION - Groq API key is read from the GROQ_API_KEY env variable
 # =============================================================================
-GROQ_API_KEY = "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"  # Replace with your actual Groq API key
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
 # =============================================================================
 
 # Configure Groq API
-if GROQ_API_KEY and GROQ_API_KEY != "YOUR_GROQ_API_KEY_HERE":
+if GROQ_API_KEY:
     groq_client = Groq(api_key=GROQ_API_KEY)
 else:
     groq_client = None
@@ -241,9 +241,9 @@ with st.sidebar:
     st.markdown("## ⚙️ Configuration")
     
     # API Key status
-    if GROQ_API_KEY == "YOUR_GROQ_API_KEY_HERE":
+    if not GROQ_API_KEY:
         st.error("⚠️ Add Groq API Key")
-        st.info("Edit line 14 in chatbot_ui.py")
+        st.info("Set the GROQ_API_KEY environment variable")
     else:
         st.success("✅ Groq AI Connected")
     
@@ -409,8 +409,8 @@ else:
     user_input = st.chat_input("Ask me anything about your style, outfits, or fashion advice...")
     
     if user_input:
-        if GROQ_API_KEY == "YOUR_GROQ_API_KEY_HERE":
-            st.error("⚠️ Please add your Groq API key in chatbot_ui.py file (line 14)")
+        if not GROQ_API_KEY:
+            st.error("⚠️ Set the GROQ_API_KEY environment variable and restart the app")
         else:
             # Add user message to history
             st.session_state.chat_history.append({

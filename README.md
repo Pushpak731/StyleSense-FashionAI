@@ -26,13 +26,11 @@ pip install -r requirements.txt
 
 ### 2. Configure your Groq API key
 
-In `chatbot_ui.py`, replace the placeholder with your key (get one at [console.groq.com](https://console.groq.com)):
+The app reads the key from the `GROQ_API_KEY` environment variable (get one at [console.groq.com](https://console.groq.com)):
 
-```python
-GROQ_API_KEY = "YOUR_GROQ_API_KEY_HERE"
+```bash
+export GROQ_API_KEY="your-key-here"   # Windows: set GROQ_API_KEY=your-key-here
 ```
-
-> ⚠️ Tip: for anything public, load the key from an environment variable instead of hardcoding it.
 
 ### 3. Run the app
 
